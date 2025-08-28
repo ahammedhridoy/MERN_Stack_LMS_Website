@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const AppProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY || "$";
   const [allCourses, setAllCourses] = useState([]);
+  const [isEducator, setIsEducator] = useState(true);
   const navigate = useNavigate();
 
   // Fetch all courses from the API
@@ -32,10 +33,10 @@ export const AppProvider = ({ children }) => {
   const value = {
     currency,
     allCourses,
-    setAllCourses,
     fetchAllCourses,
     navigate,
     calculateRating,
+    isEducator,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

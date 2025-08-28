@@ -1,23 +1,56 @@
 import React from "react";
+import { assets, dummyTestimonial } from "./../../assets/assets";
 
 const TestimonialsSection = () => {
   return (
-    <div className="bg-gray-100 p-8">
-      <h2 className="text-2xl font-bold mb-4">Testimonials</h2>
-      <div className="flex flex-col space-y-4">
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-gray-600">
-            "This platform has changed my life! The courses are top-notch."
-          </p>
-          <span className="text-gray-500">- Happy Student</span>
-        </div>
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-gray-600">
-            "I learned so much and landed my dream job thanks to the resources
-            here."
-          </p>
-          <span className="text-gray-500">- Grateful Learner</span>
-        </div>
+    <div className="px-8 pb-14 md:px-0">
+      <h2 className="text-3xl font-medium text-gray-800">Testimonials</h2>
+      <p className="mt-3 text-gray-500 md:text-base">
+        Hear from our learners as they share their journeys of transformation,
+        success, and how our <br /> platform has made a difference in their
+        lives.
+      </p>
+      <div className="grid gap-8 grid-cols-auto mt-14">
+        {dummyTestimonial.map((testimonial, index) => (
+          <div
+            key={index}
+            className="pb-6 text-sm text-left bg-white border rounded-lg border-gray-500/30 shadow-[0px_4px_15px_0px] overflow-hidden shadow-black/5"
+          >
+            <div className="flex items-start gap-4 px-5 py-4 bg-gray-500/10">
+              <img
+                className="w-12 h-12 rounded-full"
+                src={testimonial.image}
+                alt={testimonial.name}
+              />
+              <div>
+                <h1 className="text-lg font-medium text-gray-800">
+                  {testimonial.name}
+                </h1>
+                <p className="text-gray-800/80">{testimonial.role}</p>
+              </div>
+            </div>
+            <div className="p-5 pb-7">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <img
+                    className="h-5"
+                    key={i}
+                    src={
+                      i < Math.floor(testimonial.rating)
+                        ? assets.star
+                        : assets.star_blank
+                    }
+                    alt="star"
+                  />
+                ))}
+              </div>
+              <p className="mt-5 text-gray-500">{testimonial.feedback}</p>
+            </div>
+            <a href="#" className="px-5 text-blue-500 underline">
+              Read More
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );
