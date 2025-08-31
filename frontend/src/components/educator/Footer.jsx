@@ -1,12 +1,29 @@
 import React from "react";
+import { assets } from "../../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-800 text-white p-4">
-      <p className="text-center">
-        © 2023 Learning Platform. All rights reserved.
-      </p>
-    </div>
+    <footer className="flex flex-col-reverse items-center justify-between w-full px-8 text-left border-t md:flex-row">
+      <div className="flex items-center gap-4">
+        <img src={assets.logo} alt="Logo" className="hidden w-20 md:block" />
+        <div className="hidden w-px md:block h-7 bg-gray-500/60"></div>
+        <p className="py-4 text-xs text-center text-gray-500 md:text-sm">
+          © 2025 Learning Platform. All rights reserved.
+        </p>
+      </div>
+
+      <div className="flex items-center gap-3 max-md:mt-4">
+        <a href="#">
+          <img src={assets.facebook_icon} alt="facebook" />
+        </a>
+        <a href="#">
+          <img src={assets.twitter_icon} alt="twitter" />
+        </a>
+        <a href="#">
+          <img src={assets.instagram_icon} alt="instagram" />
+        </a>
+      </div>
+    </footer>
   );
 };
 

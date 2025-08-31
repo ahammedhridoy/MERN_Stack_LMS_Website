@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [allCourses, setAllCourses] = useState([]);
   const [isEducator, setIsEducator] = useState(true);
   const navigate = useNavigate();
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
 
   // Fetch all courses from the API
   const fetchAllCourses = async () => {
@@ -57,8 +58,14 @@ export const AppProvider = ({ children }) => {
     return totalLectures;
   };
 
+  // Fetch enrolled courses
+  const fetchEnrolledCourses = async () => {
+    setEnrolledCourses(dummyCourses);
+  };
+
   useEffect(() => {
     fetchAllCourses();
+    fetchEnrolledCourses();
   }, []);
 
   const value = {
@@ -72,6 +79,8 @@ export const AppProvider = ({ children }) => {
     calculateChapterTime,
     calculateCourseDuration,
     calculateTotalLectures,
+    enrolledCourses,
+    fetchEnrolledCourses,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
