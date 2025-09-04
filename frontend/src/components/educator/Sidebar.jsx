@@ -9,7 +9,7 @@ const Sidebar = () => {
   const menuItems = [
     {
       name: "Dashboard",
-      path: "/educator/educator",
+      path: "/educator",
       icon: assets.home_icon,
     },
     {

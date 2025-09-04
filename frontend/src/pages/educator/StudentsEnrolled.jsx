@@ -1,13 +1,60 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { dummyStudentEnrolled } from "../../assets/assets";
+import Loading from "../../components/student/Loading";
 
 const StudentsEnrolled = () => {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Students Enrolled</h1>
-      <p className="text-gray-600 mb-4">
-        Here you can find all the students enrolled in your courses.
-      </p>
+  const [enrolledStudents, setEnrolledStudents] = useState(null);
+
+  const fetchEnrolledStudents = async () => {
+    setEnrolledStudents(dummyStudentEnrolled);
+  };
+
+  useEffect(() => {
+    fetchEnrolledStudents();
+  }, []);
+
+  return enrolledStudents ? (
+    <div className="flex flex-col items-start justify-between min-h-screen p-4 pt-8 pb-0 md:p-8 md:pb-0">
+      <div className="flex flex-col items-center w-full max-w-4xl overflow-hidden bg-white border rounded-md border-gray-500/20">
+        <table className="w-full pb-4 overflow-hidden table-fixed md:table-auto">
+          <thead className="text-sm text-left text-gray-900 border-b border-gray-500/20">
+            <tr>
+              <th className="hidden px-4 py-3 font-semibold text-center sm:table-cell">
+                #
+              </th>
+              <th className="px-4 py-3 font-semibold">Student Name</th>
+              <th className="px-4 py-3 font-semibold">Course Title</th>
+              <th className="hidden px-4 py-3 font-semibold sm:table-cell">
+                Date
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-sm text-gray-500">
+            {enrolledStudents.map((enrollment, index) => (
+              <tr key={enrollment.id} className="border-b border-gray-500/20">
+                <td className="hidden px-4 py-3 text-center sm:table-cell">
+                  {index + 1}
+                </td>
+                <td className="flex items-center px-2 py-3 space-x-3 md:px-4">
+                  <img
+                    src={enrollment.student.imageUrl}
+                    alt="course image"
+                    className="rounded-full w-9 h-9"
+                  />
+                  <span className="truncate">{enrollment.student.name}</span>
+                </td>
+                <td className="px-4 py-3">{enrollment.courseTitle}</td>
+                <td className="hidden px-4 py-3 sm:table-cell">
+                  {new Date(enrollment.purchaseDate).toLocaleDateString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
+  ) : (
+    <Loading />
   );
 };
 
