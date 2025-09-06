@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import humanizeDuration from "humanize-duration";
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 export const AppProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY || "$";
@@ -10,6 +11,9 @@ export const AppProvider = ({ children }) => {
   const [isEducator, setIsEducator] = useState(true);
   const navigate = useNavigate();
   const [enrolledCourses, setEnrolledCourses] = useState([]);
+
+  const { getToken } = useAuth();
+  const { user } = useUser();
 
   // Fetch all courses from the API
   const fetchAllCourses = async () => {
@@ -67,6 +71,16 @@ export const AppProvider = ({ children }) => {
     fetchAllCourses();
     fetchEnrolledCourses();
   }, []);
+
+  const logToken = async () => {
+    console.log(await getToken());
+  };
+
+  useEffect(() => {
+    if (user) {
+      logToken();
+    }
+  }, [user]);
 
   const value = {
     currency,
