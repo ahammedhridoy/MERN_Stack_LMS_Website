@@ -42,7 +42,7 @@ export const purchaseCourse = async (req, res) => {
     const userData = await User.findById(userId);
     const courseData = await Course.findById(courseId);
 
-    if (userData || !courseData) {
+    if (!userData || !courseData) {
       return res.json({ success: false, message: "Data Not Found" });
     }
 
