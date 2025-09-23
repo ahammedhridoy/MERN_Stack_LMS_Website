@@ -2,6 +2,7 @@ import { clerkClient } from "@clerk/express";
 import { v2 as cloudinary } from "cloudinary";
 import Course from "../models/Course.js";
 import Purchase from "../models/Purchase.js";
+import User from "../models/User.js";
 
 export const updateRoleToEducator = async (req, res) => {
   try {
@@ -117,28 +118,44 @@ export const educatorDashboardData = async (req, res) => {
 };
 
 // Get enrolled students data
+
 export const getEnrolledStudentsData = async (req, res) => {
   try {
-    const educator = req.auth.userId;
-    const courses = await Course.find({ educator: educator });
-    const courseIds = courses.map((course) => course._id);
+    const educatorId = req.auth?.userId;
+    if (!educatorId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
 
-    const purchases = await Purchase.find({
-      courseId: { $in: courseIds },
-      status: "completed",
-    })
-      .populate("userId", "name imageUrl")
-      .populate("courseId", "courseTitle");
+    // find all courses for this educator and populate students
+    const courses = await Course.find({ educator: educatorId }).populate(
+      "enrolledStudents",
+      "name imageUrl email"
+    );
 
-    const enrolledStudents = purchases.map((purchase) => ({
-      student: purchase.userId,
-      courseTitle: purchase.courseId.courseTitle,
-      purchaseData: purchase.createdAt,
-    }));
+    if (!courses.length) {
+      return res.json({ success: true, enrolledStudents: [] });
+    }
+
+    // flatten all enrolled students with course info
+    const enrolledStudents = courses.flatMap((course) =>
+      course.enrolledStudents.map((student) => ({
+        student: {
+          id: student._id,
+          name: student.name,
+          imageUrl: student.imageUrl,
+          email: student.email,
+        },
+        course: {
+          id: course._id,
+          courseTitle: course.courseTitle,
+        },
+        enrolledAt: new Date(), // you can replace with real enrollment date if available
+      }))
+    );
 
     res.json({ success: true, enrolledStudents });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Error fetching enrolled students:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };

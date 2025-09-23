@@ -6,7 +6,7 @@ import {
   getEnrolledStudentsData,
   updateRoleToEducator,
 } from "../controllers/educatorController.js";
-import { requireAuth } from "@clerk/express"; // <-- this one exists
+import { requireAuth } from "@clerk/express";
 import upload from "../configs/multer.js";
 import { protectEducator } from "./../middlewares/authMiddleware.js";
 

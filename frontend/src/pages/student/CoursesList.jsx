@@ -13,7 +13,7 @@ const CoursesList = () => {
 
   useEffect(() => {
     if (allCourses && allCourses.length > 0) {
-      const tempCourses = [...allCourses]; // shallow copy
+      const tempCourses = [...allCourses];
 
       if (input) {
         const normalizedInput = input.toLowerCase();
@@ -27,6 +27,8 @@ const CoursesList = () => {
       }
     }
   }, [allCourses, input]);
+
+  console.log("allCourses", allCourses);
 
   return (
     <>

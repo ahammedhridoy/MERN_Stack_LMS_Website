@@ -93,7 +93,7 @@ const CourseDetails = () => {
   return courseData ? (
     <>
       <div className="relative flex flex-col-reverse items-start justify-between gap-10 px-8 pt-20 text-left md:flex-row md:px-36 md:pt-30">
-        <div className="absolute top-0 left-0 w-full h-section-height -z-1 bg-gradient-to-b from-cyan-100/70"></div>
+        <div className="absolute top-0 left-0 w-full h-section-height -z-1 bg-gradient-to-b from-blue-500/70"></div>
 
         {/* Left Column */}
         <div className="z-10 max-w-xl text-gray-500">

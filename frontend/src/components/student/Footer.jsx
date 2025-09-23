@@ -6,7 +6,11 @@ const Footer = () => {
     <footer className="w-full pt-10 text-left bg-gray-900 md:px-36">
       <div className="flex flex-col items-start justify-center gap-10 px-8 py-10 border-b md:flex-row md:px-0 md:gap-32 border-white/30">
         <div className="flex flex-col items-center w-full md:items-start">
-          <img src={assets.logo_dark} alt="logo" />
+          <img
+            src={assets.eduka}
+            alt="logo"
+            className="cursor-pointer w-14 lg:w-14"
+          />
           <p className="mt-6 text-sm text-center md:text-left text-white/80">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text.

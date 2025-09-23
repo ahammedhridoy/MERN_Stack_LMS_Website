@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full pt-20 text-center md:pt-36 px-7 md:px-0 space-y-7 bg-gradient-to-b from-cyan-100/70 to-white">
+    <div className="flex flex-col items-center justify-center w-full pt-20 text-center md:pt-36 px-7 md:px-0 space-y-7 bg-gradient-to-b from-blue-500/70 to-white">
       <h1 className="relative max-w-3xl mx-auto font-bold text-gray-800 md:text-home-heading-large text-home-heading-small">
         Empower your future with the courses designed to{" "}
         <span className="text-blue-500">fit your choice.</span>{" "}

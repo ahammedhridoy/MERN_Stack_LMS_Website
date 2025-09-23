@@ -29,12 +29,12 @@ const MyEnrollments = () => {
             { headers: { Authorization: `Bearer ${token}` } }
           );
           let totalLectures = calculateTotalLectures(course);
-          const lectureCompleted = data.progressData
+          const completedLectures = data.progressData
             ? data.progressData.lectureCompleted.length
             : 0;
           return {
             totalLectures,
-            lectureCompleted,
+            completedLectures,
           };
         })
       );

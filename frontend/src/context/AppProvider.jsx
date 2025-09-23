@@ -16,8 +16,6 @@ export const AppProvider = ({ children }) => {
 
   const { getToken } = useAuth();
   const { user } = useUser();
-  const token = localStorage.getItem("token");
-  console.log(token);
 
   const backendUrl =
     import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";

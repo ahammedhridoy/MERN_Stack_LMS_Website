@@ -86,6 +86,17 @@ export const purchaseCourse = async (req, res) => {
       },
     });
 
+    await User.updateOne(
+      { _id: userId },
+      { $push: { enrolledCourses: courseId } }
+    );
+    await Course.updateOne(
+      { _id: courseId },
+      { $push: { enrolledStudents: userId } }
+    );
+
+    await newPurchase.save();
+
     res.json({ success: true, session_url: session.url });
   } catch (error) {
     console.log(error.message);

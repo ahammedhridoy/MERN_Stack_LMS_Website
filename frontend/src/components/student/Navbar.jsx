@@ -43,16 +43,16 @@ const Navbar = () => {
   return (
     <div
       className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 boder-b border-gray-500 py-4 ${
-        isCourseListPage ? "bg-white" : "bg-cyan-100/70"
+        isCourseListPage ? "bg-white" : "bg-blue-500/70 text-white"
       }`}
     >
       <img
         onClick={() => navigate("/")}
-        src={assets.logo}
+        src={assets.eduka}
         alt="Logo"
-        className="cursor-pointer w-28 lg:w-32"
+        className="cursor-pointer w-14 lg:w-14"
       />
-      <div className="items-center hidden gap-5 text-gray-500 md:flex">
+      <div className="items-center hidden gap-5 text-white-500 md:flex">
         <div className="flex items-center gap-5">
           {user && (
             <>
