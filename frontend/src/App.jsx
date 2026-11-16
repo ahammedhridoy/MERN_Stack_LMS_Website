@@ -18,26 +18,40 @@ import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const isEducatorRoute = useMatch("/educator/*");
+
   return (
-    <div className="min-h-screen bg-white text-default">
-      <ToastContainer />
+    <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans selection:bg-brand-100 selection:text-brand-900">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {!isEducatorRoute && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/course-list" element={<CoursesList />} />
-        <Route path="/course-list/:input" element={<CoursesList />} />
-        <Route path="/course/:id" element={<CourseDetails />} />
-        <Route path="/my-enrollments" element={<MyEnrollments />} />
-        <Route path="/player/:courseId" element={<Player />} />
-        <Route path="/loading/:path" element={<Loading />} />
-        <Route path="/educator" element={<Educator />}>
-          <Route path="/educator" element={<Dashboard />} />
-          <Route path="add-course" element={<AddCourse />} />
-          <Route path="my-courses" element={<MyCourses />} />
-          <Route path="student-enrolled" element={<StudentsEnrolled />} />
-        </Route>
-      </Routes>
+      <div className="flex-1 flex flex-col">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/course-list" element={<CoursesList />} />
+          <Route path="/course-list/:input" element={<CoursesList />} />
+          <Route path="/course/:id" element={<CourseDetails />} />
+          <Route path="/my-enrollments" element={<MyEnrollments />} />
+          <Route path="/player/:courseId" element={<Player />} />
+          <Route path="/loading/:path" element={<Loading />} />
+          <Route path="/educator" element={<Educator />}>
+            <Route path="/educator" element={<Dashboard />} />
+            <Route path="add-course" element={<AddCourse />} />
+            <Route path="my-courses" element={<MyCourses />} />
+            <Route path="student-enrolled" element={<StudentsEnrolled />} />
+          </Route>
+        </Routes>
+      </div>
     </div>
   );
 };

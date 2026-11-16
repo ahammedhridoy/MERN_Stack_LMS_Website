@@ -2,25 +2,37 @@ import React from "react";
 import { assets } from "../../assets/assets";
 
 const Companies = () => {
+  const companies = [
+    { name: "Microsoft", logo: assets.microsoft_logo },
+    { name: "Walmart", logo: assets.walmart_logo },
+    { name: "Accenture", logo: assets.accenture_logo },
+    { name: "Adobe", logo: assets.adobe_logo },
+    { name: "PayPal", logo: assets.paypal_logo },
+  ];
+
   return (
-    <div className="pt-16">
-      <p className="text-base text-gray-500">Trusted by learners from</p>
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-5 md:gap-16 md:mt-10">
-        <img
-          src={assets.microsoft_logo}
-          alt="Microsoft"
-          className="w-20 md:w-28"
-        />
-        <img src={assets.walmart_logo} alt="Walmart" className="w-20 md:w-28" />
-        <img
-          src={assets.accenture_logo}
-          alt="Accenture"
-          className="w-20 md:w-28"
-        />
-        <img src={assets.adobe_logo} alt="Adobe" className="w-20 md:w-28" />
-        <img src={assets.paypal_logo} alt="Paypal" className="w-20 md:w-28" />
+    <section className="w-full py-10 border-y border-slate-100 bg-slate-50/50">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <p className="text-xs sm:text-sm font-medium uppercase tracking-wider text-slate-500 mb-6">
+          Trusted by learners & engineers from leading teams worldwide
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
+          {companies.map((company, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-center p-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+            >
+              <img
+                src={company.logo}
+                alt={`${company.name} logo`}
+                className="h-6 sm:h-7 md:h-8 w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

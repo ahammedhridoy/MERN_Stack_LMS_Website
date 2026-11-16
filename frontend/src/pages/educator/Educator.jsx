@@ -5,13 +5,13 @@ import Footer from "../../components/educator/Footer";
 
 const Educator = () => {
   return (
-    <div className="min-h-screen bg-white text-default">
+    <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <Navbar />
-      <div className="flex">
+      <div className="flex flex-1">
         <Sidebar />
-        <div className="flex-1">
+        <main className="flex-1 flex flex-col overflow-x-hidden">
           <Outlet />
-        </div>
+        </main>
       </div>
       <Footer />
     </div>

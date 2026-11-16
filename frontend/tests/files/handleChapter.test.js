@@ -8,5 +8,11 @@ describe("handleChapter", () => {
     const setChapters = vi.fn();
 
     handleChapter("add", null, chapters, setChapters, fakePrompt);
+
+    expect(setChapters).toHaveBeenCalledWith(
+      expect.arrayContaining([
+        expect.objectContaining({ chapterTitle: "New Chapter" }),
+      ])
+    );
   });
 });

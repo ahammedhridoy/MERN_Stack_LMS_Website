@@ -9,8 +9,8 @@ export const getAllCourses = async (req, res) => {
 
     res.json({ success: true, courses });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Fetch courses error:", error.message);
+    res.status(500).json({ success: false, message: "Failed to fetch courses" });
   }
 };
 
@@ -20,11 +20,15 @@ export const getCourseById = async (req, res) => {
   try {
     const courseData = await Course.findById(id).populate({ path: "educator" });
 
-    // Remove lecture if isPreview is false
+    if (!courseData) {
+      return res.status(404).json({ success: false, message: "Course not found" });
+    }
+
+    // Protect paid content: strip lectureUrl if isPreviewFree is false
     courseData.courseContent.forEach((chapter) => {
       chapter.chapterContent.forEach((lecture) => {
         if (!lecture.isPreviewFree) {
-          lecture.lectureContent = "";
+          lecture.lectureUrl = "";
         }
       });
     });
@@ -32,6 +36,6 @@ export const getCourseById = async (req, res) => {
     res.json({ success: true, courseData });
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Failed to fetch course details" });
   }
 };

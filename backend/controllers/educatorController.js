@@ -1,5 +1,6 @@
 import { clerkClient } from "@clerk/express";
 import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 import Course from "../models/Course.js";
 import Purchase from "../models/Purchase.js";
 import User from "../models/User.js";
@@ -40,6 +41,11 @@ export const addCourse = async (req, res) => {
     const imageUpload = await cloudinary.uploader.upload(image.path);
     parsedCourseData.courseThumbnail = imageUpload.secure_url;
 
+    // Clean up local temporary file
+    if (fs.existsSync(image.path)) {
+      fs.unlinkSync(image.path);
+    }
+
     // Create course with thumbnail
     const newCourse = await Course.create(parsedCourseData);
 
@@ -49,6 +55,13 @@ export const addCourse = async (req, res) => {
       course: newCourse,
     });
   } catch (error) {
+    if (req.file?.path && fs.existsSync(req.file.path)) {
+      try {
+        fs.unlinkSync(req.file.path);
+      } catch (cleanupErr) {
+        console.error("Cleanup error:", cleanupErr);
+      }
+    }
     console.log(error.message);
     res.status(500).json({ success: false, message: error.message });
   }

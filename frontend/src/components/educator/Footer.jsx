@@ -3,24 +3,39 @@ import { assets } from "../../assets/assets";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col-reverse items-center justify-between w-full px-8 text-left border-t md:flex-row">
-      <div className="flex items-center gap-4">
-        <img src={assets.logo} alt="Logo" className="hidden w-20 md:block" />
-        <div className="hidden w-px md:block h-7 bg-gray-500/60"></div>
-        <p className="py-4 text-xs text-center text-gray-500 md:text-sm">
-          © 2025 Learning Platform. All rights reserved.
-        </p>
+    <footer className="w-full bg-white border-t border-slate-200/80 px-6 sm:px-8 py-4 flex flex-col-reverse sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div className="flex items-center gap-3">
+        <img src={assets.eduka} alt="Eduka" className="w-6 h-auto" />
+        <span>© {new Date().getFullYear()} Eduka Educator Studio. All rights reserved.</span>
       </div>
 
-      <div className="flex items-center gap-3 max-md:mt-4">
-        <a href="#">
-          <img src={assets.facebook_icon} alt="facebook" />
+      <div className="flex items-center gap-4">
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Facebook"
+          className="opacity-60 hover:opacity-100 transition-opacity"
+        >
+          <img src={assets.facebook_icon} alt="" className="w-4 h-4" />
         </a>
-        <a href="#">
-          <img src={assets.twitter_icon} alt="twitter" />
+        <a
+          href="https://twitter.com"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Twitter"
+          className="opacity-60 hover:opacity-100 transition-opacity"
+        >
+          <img src={assets.twitter_icon} alt="" className="w-4 h-4" />
         </a>
-        <a href="#">
-          <img src={assets.instagram_icon} alt="instagram" />
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Instagram"
+          className="opacity-60 hover:opacity-100 transition-opacity"
+        >
+          <img src={assets.instagram_icon} alt="" className="w-4 h-4" />
         </a>
       </div>
     </footer>
