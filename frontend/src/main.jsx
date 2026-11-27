@@ -5,20 +5,26 @@ import App from "./App.jsx";
 import { AppProvider } from "./context/AppProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
+import MissingKeyNotice from "./components/common/MissingKeyNotice.jsx";
 
-// Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
+const rootElement = document.getElementById("root");
 
-createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl={"/"}>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </ClerkProvider>
-  </BrowserRouter>
-);
+if (!PUBLISHABLE_KEY) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <MissingKeyNotice />
+    </StrictMode>
+  );
+} else {
+  createRoot(rootElement).render(
+    <BrowserRouter>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl={"/"}>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </ClerkProvider>
+    </BrowserRouter>
+  );
+}

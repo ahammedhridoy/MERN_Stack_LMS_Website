@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
 
   // Fetch UserData
   const fetchUserData = async () => {
-    if (user.publicMetadata.role === "educator") {
+    if (user?.publicMetadata?.role === "educator") {
       setIsEducator(true);
     }
 
@@ -121,6 +121,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchAllCourses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -128,6 +129,7 @@ export const AppProvider = ({ children }) => {
       fetchUserData();
       fetchEnrolledCourses();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const value = {

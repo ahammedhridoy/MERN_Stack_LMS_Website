@@ -20,7 +20,7 @@ describe("handleChapter", () => {
     ]);
   });
 
-  it("should remiove a chapter", () => {
+  it("should remove a chapter", () => {
     const chapters = [{ chapterId: "123", chapterTitle: "Chapter 1" }];
     const setChapters = vi.fn();
 
