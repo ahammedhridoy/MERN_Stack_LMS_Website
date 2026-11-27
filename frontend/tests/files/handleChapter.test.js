@@ -8,5 +8,24 @@ describe("handleChapter", () => {
     const setChapters = vi.fn();
 
     handleChapter("add", null, chapters, setChapters, fakePrompt);
+
+    expect(setChapters).toHaveBeenCalledWith([
+      {
+        chapterId: expect.any(String),
+        chapterTitle: "New Chapter",
+        chapterContent: [],
+        collapsed: false,
+        chapterOrder: 1,
+      },
+    ]);
+  });
+
+  it("should remiove a chapter", () => {
+    const chapters = [{ chapterId: "123", chapterTitle: "Chapter 1" }];
+    const setChapters = vi.fn();
+
+    handleChapter("remove", "123", chapters, setChapters);
+
+    expect(setChapters).toHaveBeenCalledWith([]);
   });
 });

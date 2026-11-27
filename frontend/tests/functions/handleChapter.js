@@ -1,11 +1,14 @@
 import uniqid from "uniqid";
 
+export const defaultPrompt =
+  typeof prompt !== "undefined" ? prompt : () => null;
+
 export const handleChapter = (
   action,
   chapterId,
   chapters,
   setChapters,
-  promptFn = prompt
+  promptFn = defaultPrompt
 ) => {
   if (action === "add") {
     const title = promptFn("Enter chapter title");
